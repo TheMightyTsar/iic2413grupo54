@@ -1,0 +1,23 @@
+Productos
+id,nombre,precio,numero_cajas,tipo,tamano,color,descripcion,dimensiones,material,carga,frecuencia,potencia,tension
+
+Cajas
+n_caja,id_producto (key),peso,descripcion
+
+Clientes
+id,nombre,rut,calle,numero_domicilio,comuna,region
+
+Despacho
+id_despacho,id_compra,fecha_entrega, patente_vehiculo
+
+Vehiculos
+id,patente,capacidad_carga(Toneladas),cantidad_personas
+
+
+
+
+Repartidores
+id,nombre,rut,edad,genero,id_vehiculo
+
+conductores
+id_vehiculo, rut_chofer
