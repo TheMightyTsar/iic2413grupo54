@@ -1,23 +1,41 @@
-Productos
-id,nombre,precio,numero_cajas,tipo,tamano,color,descripcion,dimensiones,material,carga,frecuencia,potencia,tension
+Productos (productos.csv)
+id (primary key) ,nombre,precio,numero_cajas,tipo,tamano,color,descripcion,dimensiones,material,carga,frecuencia,potencia,tension
 
 Cajas
-n_caja,id_producto (key),peso,descripcion
+n_caja,id_producto (Primary key),peso,descripcion
 
-Clientes
-id,nombre,rut,calle,numero_domicilio,comuna,region
+Clientes (clientes.csv)
+id(Primary key),nombre,rut,calle,numero_domicilio,comuna,region
 
-Despacho
-id_despacho,id_compra,fecha_entrega, patente_vehiculo
+RUT_clientes (clientes.csv)
+id_cliente, rut_cliente
 
-Vehiculos
-id,patente,capacidad_carga(Toneladas),cantidad_personas
+{{{
+
+Compras (compras.csv)
+id_compra,fecha,producto,id_cliente,id_tienda,cantidad
+
+Despachos
+id_despacho, fecha_entrega, patente_vehiculo
+
+}}} revisar bien la relacion entre ambos****
 
 
+Vehiculos 
+id,capacidad_carga(Toneladas),cantidad_personas
 
+Patentes 
+id_vehiculo, patente
 
-Repartidores
-id,nombre,rut,edad,genero,id_vehiculo
+Repartidores (repartidores.csv)
+id,nombre, edad, genero, id_vehiculo
 
-conductores
-id_vehiculo, rut_chofer
+RUTS (repartidores.csv)
+id_repartidor, rut
+
+conductores (repartidores.csv)
+id_vehiculo, id_chofer
+
+licencias  (licencias.csv)
+id,id_personal,fecha_emision,fecha_expiracion,tipo
+
