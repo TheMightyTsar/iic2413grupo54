@@ -1,41 +1,49 @@
-Productos (productos.csv)
-id (primary key) ,nombre,precio,numero_cajas,tipo,tamano,color,descripcion,dimensiones,material,carga,frecuencia,potencia,tension
 
-Cajas
-n_caja,id_producto (Primary key),peso,descripcion
+Productos (productos.csv)
+id (Primary key) ,nombre,precio,numero_cajas,tipo,tamano,color,descripcion,dimensiones,material,carga,frecuencia,potencia,tension
+[Listo]
+<---
+distribucion_cajas (cajas.csv)
+id_caja (Primary Key **generar en codigo), id_producto, n_caja (id_caja en el csv)
+[Listo]
+--->
+Cajas (cajas.csv)
+id_caja (Primary key), peso, descripcion
+[Listo]
+
 
 Clientes (clientes.csv)
-id(Primary key),nombre,rut,calle,numero_domicilio,comuna,region
+id(Primary key), rut, nombre,calle,numero_domicilio,comuna,region
+[Listo]
 
-RUT_clientes (clientes.csv)
-id_cliente, rut_cliente
 
-{{{
 
 Compras (compras.csv)
-id_compra,fecha,producto,id_cliente,id_tienda,cantidad
+id_venta (Primary Key), id_cliente, id_tienda, cantidad, fecha
+[Listo]
+<---
+Venta (compras.csv)
+id_venta(Primary Key **generada codigo), id_compra, id_producto
+[Listo]
 
-Despachos
-id_despacho, fecha_entrega, patente_vehiculo
-
-}}} revisar bien la relacion entre ambos****
 
 
-Vehiculos 
-id,capacidad_carga(Toneladas),cantidad_personas
+Despachos (despachos.csv)
+id_despacho(Primary key), id_compra, fecha_entrega, patente_vehiculo (**añadir en code)
+[Listo]
 
-Patentes 
-id_vehiculo, patente
+Vehiculos  (vehiculos.csv)
+id(Primary key), patente, capacidad_carga(Toneladas),cantidad_personas
+[Listo]
 
 Repartidores (repartidores.csv)
-id,nombre, edad, genero, id_vehiculo
-
-RUTS (repartidores.csv)
-id_repartidor, rut
+id(Primary key), rut, nombre, edad, genero, id_vehiculo
+[Listo]
 
 conductores (repartidores.csv)
-id_vehiculo, id_chofer
+id(Primary key), id_vehiculo, id_repartidor
+[Listo]
 
 licencias  (licencias.csv)
-id,id_personal,fecha_emision,fecha_expiracion,tipo
-
+id (Primary key),id_personal,fecha_emision,fecha_expiracion,tipo
+[Listo]
