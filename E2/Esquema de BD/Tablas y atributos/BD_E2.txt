@@ -33,11 +33,11 @@ id_despacho(Primary key), id_compra, fecha_entrega, patente_vehiculo (**añadir 
 [Listo]
 
 Vehiculos  (vehiculos.csv)
-id(Primary key), patente, capacidad_carga(Toneladas),cantidad_personas
+id(Primary key), patente, capacidad_carga(Toneladas),cantidad_personas, region(**añadir en code)
 [Listo]
 
 Repartidores (repartidores.csv)
-id(Primary key), rut, nombre, edad, genero, id_vehiculo
+id(Primary key), rut, nombre, edad, genero, id_vehiculo, region(**añadir en code)
 [Listo]
 
 conductores (repartidores.csv)

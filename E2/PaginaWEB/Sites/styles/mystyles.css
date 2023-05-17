@@ -8,17 +8,19 @@ input {
 
 input[type=text] {
     font-size: 20px;
+    background-color: #af9efc;
 }
 
 input[type=submit] {
     width: 10em;
     height: 2em;
     font-size: 25px;
+    background-color: #8e6cff;
 }
 
 button {
-    background-color: green;
-    color: white;
+    background-color: #008100;
+    color: #8e6cff;
     border: none;
     border-radius: 5px;
     font-size: 25px;
@@ -27,7 +29,8 @@ button {
 }
 
 h1 {
-    color: green;
+    color: #0500a4;
+    text-transform: uppercase;
 }
 
 h1,
@@ -41,6 +44,10 @@ body {
     width: 100%;
     font-size: 20px;
     text-align: center;
+    background: linear-gradient(45deg, #0081ff, #00ffd0);
+    font-family: Arial, sans-serif;
+    color: #333333;
+
 }
 
 table.center {
@@ -53,8 +60,9 @@ table.center {
 }
 
 th {
-    background-color: #4CAF50;
-    color: white;
+    background-color: #333333;
+    color: #ffffff;
+    padding: 10px;
 }
 
 tr:hover {

@@ -1,8 +1,8 @@
 <?php include('templates/header.html');   ?>
 
 <body>
-  <h1 align="center">Tienda Super Pro</h1>
-  <p style="text-align:center;">Servicio de productos y entrega</p>
+  <h1 align="center">Super consultas 54</h1>
+  <p style="text-align:center;">Servicio de productos y entregas</p>
 
   <br>
 
