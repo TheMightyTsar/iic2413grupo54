@@ -6,30 +6,25 @@
 
   <br>
 
-  <h3 align="center"> ¿Quieres buscar un Pokemón por tipo y/o nombre?</h3>
+  <h3 align="center"> ¿Quieres buscar los despachos para una fecha especifica?</h3>
 
-  <form align="center" action="consultas/consulta_tipo_nombre.php" method="post">
-    Tipo:
-    <input type="text" name="tipo_elegido">
+  <form align="center" action="consultas/consulta_despachos_por_fecha.php" method="post">
+    Fecha:
+    <input type="text" name="fecha">
     <br/>
-    Nombre:
-    <input type="text" name="nombre_pokemon">
-    <br/><br/>
-    <input type="submit" value="Buscar">
   </form>
   
   <br>
   <br>
   <br>
 
-  <h3 align="center"> ¿Quieres buscar un Pokemón por su ID?</h3>
+  <h3 align="center"> ¿Quieres buscar al cliente de una compra?</h3>
 
-  <form align="center" action="consultas/consulta_stats.php" method="post">
-    Id:
+  <form align="center" action="consultas/consulta_cliente_compra.php" method="post">
+    Id de compra:
     <input type="text" name="id_elegido">
     <br>
     <br>
-    <input type="submit" value="Buscar">
   </form>
   
   <br>

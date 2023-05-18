@@ -47,3 +47,6 @@ id(Primary key), id_vehiculo, id_repartidor
 licencias  (licencias.csv)
 id (Primary key),id_personal,fecha_emision,fecha_expiracion,tipo
 [Listo]
+---------------------------------
+CREATE TABLE Productos (ID INT PRIMARY KEY, nombre TEXT, precio INT, numero_cajas INT, tipo TEXT, tamano TEXT, color TEXT, descripcion TEXT, dimensiones TEXT, material TEXT, carga INT, frecuencia INT, potencia INT, tension INT);
+CREATE TABLE DistribucionCajas (ID_caja INT PRIMARY KEY, id_producto INT, n_caja INT, FOREIGN KEY (id_producto) REFERENCES Productos (ID));
