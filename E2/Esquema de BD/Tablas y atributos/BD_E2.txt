@@ -3,7 +3,7 @@ Productos (productos.csv)
 id (Primary key) ,nombre,precio,numero_cajas,tipo,tamano,color,descripcion,dimensiones,material,carga,frecuencia,potencia,tension
 [Listo]
 <---
-distribucion_cajas (cajas.csv)
+distribucioncajas (cajas.csv)
 id_caja (Primary Key **generar en codigo), id_producto, n_caja (id_caja en el csv)
 [Listo]
 --->
@@ -18,26 +18,41 @@ id(Primary key), rut, nombre,calle,numero_domicilio,comuna,region
 
 
 
+
 Compras (compras.csv)
 id_venta (Primary Key), id_cliente, id_tienda, cantidad, fecha
 [Listo]
 <---
 Venta (compras.csv)
-id_venta(Primary Key **generada codigo), id_compra, id_producto
+id(Primary Key **generada codigo), id_compra, id_producto
 [Listo]
 
 
 
-Despachos (despachos.csv)
-id_despacho(Primary key), id_compra, fecha_entrega, patente_vehiculo (**añadir en code)
-[Listo]
+
+
 
 Vehiculos  (vehiculos.csv)
-id(Primary key), patente, capacidad_carga(Toneladas),cantidad_personas, region(**añadir en code)
+id(Primary key), capacidad_carga(Toneladas),cantidad_personas, region(**añadir en code)
 [Listo]
 
+Patentes (vehiculos.csv)
+id(Primary key), patente
+[Listo]
+
+
+AdministracionDespachos
+id (Primary Key **añadir en code), id_despacho, id_compra,
+[listo]
+
+Despachos (despachos.csv)
+id_entrega (Primary Key **añadir en code), fecha_entrega, patente_vehiculo (**añadir en code)
+[Listo]   
+
+
+
 Repartidores (repartidores.csv)
-id(Primary key), rut, nombre, edad, genero, id_vehiculo, region(**añadir en code)
+id(Primary key), nombre, edad, genero, id_vehiculo, region(**añadir en code)
 [Listo]
 
 conductores (repartidores.csv)
@@ -45,8 +60,38 @@ id(Primary key), id_vehiculo, id_repartidor
 [Listo]
 
 licencias  (licencias.csv)
-id (Primary key),id_personal,fecha_emision,fecha_expiracion,tipo
+id (Primary key),id_repartidor,fecha_emision,fecha_expiracion,tipo
+[Listo]
+
+RUTS
+ID_repartidor (PRIMARY KEY), RUT
 [Listo]
 ---------------------------------
 CREATE TABLE Productos (ID INT PRIMARY KEY, nombre TEXT, precio INT, numero_cajas INT, tipo TEXT, tamano TEXT, color TEXT, descripcion TEXT, dimensiones TEXT, material TEXT, carga INT, frecuencia INT, potencia INT, tension INT);
 CREATE TABLE DistribucionCajas (ID_caja INT PRIMARY KEY, id_producto INT, n_caja INT, FOREIGN KEY (id_producto) REFERENCES Productos (ID));
+-------------------------
+
+CREATE TABLE Cajas (ID_caja INT PRIMARY KEY, peso FLOAT, descripcion TEXT, FOREIGN KEY (id_caja) REFERENCES DistribucionCajas (ID_caja) );
+
+CREATE TABLE Clientes (ID INT PRIMARY KEY, rut TEXT, nombre TEXT, calle TEXT, numero_domicilio INT, comuna TEXT, region TEXT);
+
+CREATE TABLE Venta (ID INT PRIMARY KEY, id_compra INT, id_producto INT, FOREIGN KEY (id_producto) REFERENCES Productos (ID) );
+CREATE TABLE Compras (ID_venta INT PRIMARY KEY, id_cliente INT, id_tienda INT, cantidad INT,  fecha DATE, FOREIGN KEY (id_cliente) REFERENCES Clientes (ID), FOREIGN KEY (id_venta) REFERENCES Venta (ID) );
+
+
+CREATE TABLE Vehiculos (ID INT PRIMARY KEY, capacidad_cargas INT, cantidad_personas INT, region TEXT);
+
+CREATE TABLE Patentes (ID_vehiculo INT PRIMARY KEY, patente TEXT, FOREIGN KEY (ID_vehiculo) REFERENCES Vehiculos (ID));
+
+
+CREATE TABLE Administracion_Despachos (ID INT PRIMARY KEY, id_despacho INT, ID_compra INT, FOREIGN KEY (ID_compra) REFERENCES Venta (id_compra));
+
+CREATE TABLE Despachos (id_entrega INT PRIMARY KEY, fecha_entrega DATE, patente_vehiculo TEXT, FOREIGN KEY (patente_vehiculo) REFERENCES Patentes (patente), FOREIGN KEY (id_entrega) REFERENCES Administracion_Despachos (ID) );
+
+CREATE TABLE Repartidores (ID INT PRIMARY KEY, nombre TEXT, edad INT, genero TEXT, id_vehiculo INT, region TEXT, FOREIGN KEY (id_vehiculo) REFERENCES Vehiculos (ID));
+
+CREATE TABLE Conductores (ID INT PRIMARY KEY, ID_vehiculo INT, ID_repartidor INT, FOREIGN KEY (ID_vehiculo) REFERENCES Vehiculos (ID), FOREIGN KEY (ID_repartidor) REFERENCES Repartidores (ID));
+
+CREATE TABLE Licencias (ID INT PRIMARY KEY, ID_repartidor INT, fecha_emision DATE, fecha_expiracion DATE, tipo TEXT, FOREIGN KEY (ID_repartidor) REFERENCES Repartidores (ID));
+
+CREATE TABLE Ruts (ID_repartidor INT PRIMARY KEY, Rut TEXT, FOREIGN KEY (ID_repartidor) REFERENCES Repartidores (ID));
