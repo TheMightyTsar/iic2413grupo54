@@ -88,8 +88,14 @@ def extraer_datos():
     escribirP = [['id_vehiculo', 'patente']]
     escribirVE = [['id', 'capacidad_carga(toneladas)', 'cantidad_personas', 'region']]
 
+    id_vehiculos = []
+
     for linea in lineas_vehiculo:
         if linea[0] != 'id':
+
+            id_vehiculos.append(linea[0])
+
+
             num_region = random.randint(1, 2994)
             print(num_region)
             new_linea_patente = [linea[0], linea[1]]
@@ -100,6 +106,18 @@ def extraer_datos():
     escribir_csv('vehiculos', escribirVE)
 
     # Despachos
+    lineas_despachos = abrir_csv('despachos')
+
+    # id_despacho,id_compra,fecha_entrega
+
+    # id (Primary Key **añadir en code), id_despacho, id_compra,
+
+    # id_entrega (Primary Key **añadir en code), fecha_entrega, ID_vehiculo
+
+    HeaderDespachos = lineas_despachos[0]
+
+    new_admin_despachos = [['id', HeaderDespachos[0], HeaderDespachos[1]]]
+    new_despachos = [['id_entrega', HeaderDespachos[2], 'id_vehiculo']]
 
 print('extrayendo datos')
 extraer_datos()

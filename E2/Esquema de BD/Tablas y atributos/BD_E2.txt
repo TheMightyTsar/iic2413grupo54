@@ -33,7 +33,7 @@ id(Primary Key **generada codigo), id_compra, id_producto
 
 
 Vehiculos  (vehiculos.csv)
-id(Primary key), capacidad_carga(Toneladas),cantidad_personas, region(**añadir en code)
+id(Primary key), capacidad_carga(Toneladas), cantidad_personas, region(**añadir en code)
 [Listo]
 
 Patentes (vehiculos.csv)
