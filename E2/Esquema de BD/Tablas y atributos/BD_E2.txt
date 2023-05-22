@@ -46,7 +46,7 @@ id (Primary Key **añadir en code), id_despacho, id_compra,
 [listo]
 
 Despachos (despachos.csv)
-id_entrega (Primary Key **añadir en code), fecha_entrega, patente_vehiculo (**añadir en code)
+id_entrega (Primary Key **añadir en code), fecha_entrega, ID_vehiculo
 [Listo]   
 
 
@@ -84,9 +84,9 @@ CREATE TABLE Vehiculos (ID INT PRIMARY KEY, capacidad_cargas INT, cantidad_perso
 CREATE TABLE Patentes (ID_vehiculo INT PRIMARY KEY, patente TEXT, FOREIGN KEY (ID_vehiculo) REFERENCES Vehiculos (ID));
 
 
-CREATE TABLE Administracion_Despachos (ID INT PRIMARY KEY, id_despacho INT, ID_compra INT, FOREIGN KEY (ID_compra) REFERENCES Venta (id_compra));
+CREATE TABLE Administracion_Despachos (ID INT PRIMARY KEY, id_despacho INT, ID_compra INT);
 
-CREATE TABLE Despachos (id_entrega INT PRIMARY KEY, fecha_entrega DATE, patente_vehiculo TEXT, FOREIGN KEY (patente_vehiculo) REFERENCES Patentes (patente), FOREIGN KEY (id_entrega) REFERENCES Administracion_Despachos (ID) );
+CREATE TABLE Despachos (id_entrega INT PRIMARY KEY, fecha_entrega DATE, id_vehiculo INT, FOREIGN KEY (ID_vehiculo) REFERENCES Vehiculos (ID), FOREIGN KEY (id_entrega) REFERENCES Administracion_Despachos (ID) );
 
 CREATE TABLE Repartidores (ID INT PRIMARY KEY, nombre TEXT, edad INT, genero TEXT, id_vehiculo INT, region TEXT, FOREIGN KEY (id_vehiculo) REFERENCES Vehiculos (ID));
 

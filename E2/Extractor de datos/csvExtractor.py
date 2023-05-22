@@ -1,8 +1,14 @@
-def extraer_datos_productos():
-    # se abre el archivo
-    txt_open = open(".csv", "r", encoding="utf-8")
-    lista_txt = txt_open.readlines()
-    txt_open.close()
+def abrir_csv(archivo):
+    carpeta = 'Datos/'
+    texto = open(f'{carpeta}{archivo}.csv', "r", encoding="utf-8")
+    lineas = texto.readlines()
+    texto.close()
+    return lineas
+
+
+def extraer_datos():
+    
+
 
     # se trabaja la lista
     lista_id = []
