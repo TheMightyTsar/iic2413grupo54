@@ -1,3 +1,5 @@
+import random
+
 def abrir_csv(archivo):
     carpeta = 'Datos/'
     texto = open(f'{carpeta}{archivo}.csv', "r", encoding="utf-8")
@@ -75,6 +77,29 @@ def extraer_datos():
     escribir_csv('compra', escribirC)
 
     # Vehiculos y Patentes
+    # id,patente,capacidad_carga(Toneladas),cantidad_personas ->
+    # id,capacidad_carga(Toneladas),cantidad_personas, region
+
+    # id, patente
+    lineas_vehiculo = abrir_csv('vehiculos')
+    lineas_lugares = abrir_csv('comuna_region')
+    max_region = len(lineas_lugares)
+    headerV = lineas_vehiculo[0]
+    escribirP = [['id_vehiculo', 'patente']]
+    escribirVE = [['id', 'capacidad_carga(toneladas)', 'cantidad_personas', 'region']]
+
+    for linea in lineas_vehiculo:
+        if linea[0] != 'id':
+            num_region = random.randint(1, 2994)
+            print(num_region)
+            new_linea_patente = [linea[0], linea[1]]
+            escribirP.append(new_linea_patente)
+            new_linea_vehiculo = [linea[0], linea[2], linea[3], lineas_lugares[num_region][1]]
+            escribirVE.append(new_linea_vehiculo)
+    escribir_csv('patentes', escribirP)
+    escribir_csv('vehiculos', escribirVE)
+
+    # Despachos
 
 print('extrayendo datos')
 extraer_datos()
