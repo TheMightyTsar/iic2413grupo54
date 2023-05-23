@@ -31,7 +31,14 @@ def escribir_csv(archivo, lineas):
 
 def extraer_datos():
     # Productos
-    escribir_csv('productos', abrir_csv('productos'))
+    lista_productos = abrir_csv('productos')
+    id_productos_repetidos = []
+    new_productos = []
+    for linea in lista_productos:
+        if linea[0] not in id_productos_repetidos:
+            id_productos_repetidos.append(linea[0])
+            new_productos.append(linea)
+    escribir_csv('productos', new_productos)
 
     # distribucion Cajas y Cajas
     lineas_cajas = abrir_csv('cajas')
@@ -53,8 +60,16 @@ def extraer_datos():
     escribir_csv('cajas', TablaCajas)
 
     # Clientes
+    lineas_clientes = abrir_csv('clientes')
+    id_clientes = []
+    new_lineas_clientes = []
 
-    escribir_csv('clientes', abrir_csv('clientes'))
+    for linea in lineas_clientes:
+        if linea[0] not in id_clientes:
+            id_clientes.append(linea[0])
+            new_lineas_clientes.append(linea)
+
+    escribir_csv('clientes', new_lineas_clientes)
 
     # Venta y compra
     lineas_compras = abrir_csv('compras')
