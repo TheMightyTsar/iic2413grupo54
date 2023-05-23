@@ -97,7 +97,7 @@ def extraer_datos():
 
 
             num_region = random.randint(1, 2994)
-            print(num_region)
+
             new_linea_patente = [linea[0], linea[1]]
             escribirP.append(new_linea_patente)
             new_linea_vehiculo = [linea[0], linea[2], linea[3], lineas_lugares[num_region][1]]
@@ -118,6 +118,64 @@ def extraer_datos():
 
     new_admin_despachos = [['id', HeaderDespachos[0], HeaderDespachos[1]]]
     new_despachos = [['id_entrega', HeaderDespachos[2], 'id_vehiculo']]
+
+    id_entrega = 0
+    max_id_vehiculos = len(id_vehiculos)
+
+    for linea in lineas_despachos:
+        if linea[0] != 'id_despacho':
+
+
+            id_vehiculo = random.randint(0, max_id_vehiculos-1)
+
+            new_linea_admin_despachos = [str(id_entrega), linea[0], linea[1]]
+            new_admin_despachos.append(new_linea_admin_despachos)
+
+            new_linea_despachos = [str(id_entrega), linea[2], str(id_vehiculos[id_vehiculo])]
+            new_despachos.append(new_linea_despachos)
+
+
+            id_entrega += 1
+    escribir_csv('despachos', new_despachos)
+    escribir_csv('AdminDespachos', new_admin_despachos)
+
+    # Repartidores, Conductores, RUTs y Licencias
+
+    lineas_repartidores = abrir_csv('repartidores')
+
+    # id,nombre,rut,edad,genero,id_vehiculo,es_chofer
+
+    # Repartidores: id(Primary key), nombre, edad, genero, id_vehiculo, region(**añadir en code)
+
+    # Conductores: id(Primary key ** code), id_vehiculo, id_repartidor
+
+    # RUT: ID_repartidor (PRIMARY KEY), RUT
+
+    # Licencias: id (Primary key),id_repartidor,fecha_emision,fecha_expiracion,tipo
+
+    Repartidores = [['id', 'nombre', 'edad', 'genero', 'id_vehiculo', 'region']]
+    Conductores = [['id', 'id_vehiculo', 'id_repartidor']]
+    RUTS = [['id_repartidor', 'RUT']]
+    Licencia = abrir_csv('licencias')
+
+    id_conductor = 0
+    for linea in lineas_repartidores:
+        if linea[0] != 'id':
+            Nregion = random.randint(1, 2994)
+
+            Repartidores.append([linea[0], linea[1], linea[3], linea[4], linea[5], lineas_lugares[Nregion][1]])
+
+            if linea[6] == 'YES':
+
+                Conductores.append([str(id_conductor),linea[5], linea[0]])
+                id_conductor += 1
+
+            RUTS.append([linea[0], linea[2]])
+
+    escribir_csv('licencias', Licencia)
+    escribir_csv('repartidores', Repartidores)
+    escribir_csv('conductores', Conductores)
+    escribir_csv('ruts', RUTS)
 
 print('extrayendo datos')
 extraer_datos()
