@@ -12,7 +12,7 @@ input[type=text] {
 }
 
 input[type=submit] {
-    width: 10em;
+    width: 20em;
     height: 2em;
     font-size: 25px;
     background-color: #8e6cff;

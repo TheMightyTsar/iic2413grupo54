@@ -1,26 +1,26 @@
 
 Productos (productos.csv)
-id (Primary key) ,nombre,precio,numero_cajas,tipo,tamano,color,descripcion,dimensiones,material,carga,frecuencia,potencia,tension
+id ,nombre,precio,numero_cajas,tipo,tamano,color,descripcion,dimensiones,material,carga,frecuencia,potencia,tension
 [Listo]
 <---
 distribucioncajas (cajas.csv)
-id_caja (Primary Key **generar en codigo), id_producto, n_caja (id_caja en el csv)
+id_caja, id_producto, n_caja
 [Listo]
 --->
 Cajas (cajas.csv)
-id_caja (Primary key), peso, descripcion
+id_caja, peso, descripcion
 [Listo]
 
 
 Clientes (clientes.csv)
-id(Primary key), rut, nombre,calle,numero_domicilio,comuna,region
+id, rut, nombre,calle,numero_domicilio,comuna,region
 [Listo]
 
 
 
 
 Compras (compras.csv)
-id_venta (Primary Key), id_cliente, id_tienda, cantidad, fecha
+id_venta, id_cliente, id_tienda, cantidad, fecha
 [Listo]
 <---
 Venta (compras.csv)
@@ -69,29 +69,45 @@ ID_repartidor (PRIMARY KEY), RUT
 ---------------------------------
 CREATE TABLE Productos (ID INT PRIMARY KEY, nombre TEXT, precio INT, numero_cajas INT, tipo TEXT, tamano TEXT, color TEXT, descripcion TEXT, dimensiones TEXT, material TEXT, carga INT, frecuencia INT, potencia INT, tension INT);
 CREATE TABLE DistribucionCajas (ID_caja INT PRIMARY KEY, id_producto INT, n_caja INT, FOREIGN KEY (id_producto) REFERENCES Productos (ID));
--------------------------
-
 CREATE TABLE Cajas (ID_caja INT PRIMARY KEY, peso FLOAT, descripcion TEXT, FOREIGN KEY (id_caja) REFERENCES DistribucionCajas (ID_caja) );
-
 CREATE TABLE Clientes (ID INT PRIMARY KEY, rut TEXT, nombre TEXT, calle TEXT, numero_domicilio INT, comuna TEXT, region TEXT);
-
 CREATE TABLE Venta (ID INT PRIMARY KEY, id_compra INT, id_producto INT, FOREIGN KEY (id_producto) REFERENCES Productos (ID) );
-CREATE TABLE Compras (ID_venta INT PRIMARY KEY, id_cliente INT, id_tienda INT, cantidad INT,  fecha DATE, FOREIGN KEY (id_cliente) REFERENCES Clientes (ID), FOREIGN KEY (id_venta) REFERENCES Venta (ID) );
-
-
+CREATE TABLE Compras (ID_venta INT PRIMARY KEY, id_cliente INT, id_tienda INT, cantidad INT,  fecha TEXT, FOREIGN KEY (id_cliente) REFERENCES Clientes (ID), FOREIGN KEY (id_venta) REFERENCES Venta (ID) );
 CREATE TABLE Vehiculos (ID INT PRIMARY KEY, capacidad_cargas INT, cantidad_personas INT, region TEXT);
-
 CREATE TABLE Patentes (ID_vehiculo INT PRIMARY KEY, patente TEXT, FOREIGN KEY (ID_vehiculo) REFERENCES Vehiculos (ID));
-
-
 CREATE TABLE Administracion_Despachos (ID INT PRIMARY KEY, id_despacho INT, ID_compra INT);
-
-CREATE TABLE Despachos (id_entrega INT PRIMARY KEY, fecha_entrega DATE, id_vehiculo INT, FOREIGN KEY (ID_vehiculo) REFERENCES Vehiculos (ID), FOREIGN KEY (id_entrega) REFERENCES Administracion_Despachos (ID) );
-
+CREATE TABLE Despachos (id_entrega INT PRIMARY KEY, fecha_entrega TEXT, id_vehiculo INT, FOREIGN KEY (ID_vehiculo) REFERENCES Vehiculos (ID), FOREIGN KEY (id_entrega) REFERENCES Administracion_Despachos (ID) );
 CREATE TABLE Repartidores (ID INT PRIMARY KEY, nombre TEXT, edad INT, genero TEXT, id_vehiculo INT, region TEXT, FOREIGN KEY (id_vehiculo) REFERENCES Vehiculos (ID));
-
 CREATE TABLE Conductores (ID INT PRIMARY KEY, ID_vehiculo INT, ID_repartidor INT, FOREIGN KEY (ID_vehiculo) REFERENCES Vehiculos (ID), FOREIGN KEY (ID_repartidor) REFERENCES Repartidores (ID));
-
-CREATE TABLE Licencias (ID INT PRIMARY KEY, ID_repartidor INT, fecha_emision DATE, fecha_expiracion DATE, tipo TEXT, FOREIGN KEY (ID_repartidor) REFERENCES Repartidores (ID));
-
+CREATE TABLE Licencias (ID INT PRIMARY KEY, ID_repartidor INT, fecha_emision TEXT, fecha_expiracion TEXT, tipo TEXT, FOREIGN KEY (ID_repartidor) REFERENCES Repartidores (ID));
 CREATE TABLE Ruts (ID_repartidor INT PRIMARY KEY, Rut TEXT, FOREIGN KEY (ID_repartidor) REFERENCES Repartidores (ID));
+----------------------------------------------------
+
+\COPY Productos(id ,nombre,precio,numero_cajas,tipo,tamano,color,descripcion,dimensiones,material,carga,frecuencia,potencia,tension) FROM 'TablasE2/productos.csv' DELIMITER ',' CSV HEADER;
+
+\COPY DistribucionCajas(id_caja, id_producto, n_caja) FROM 'TablasE2/distribucioncajas.csv' DELIMITER ',' CSV HEADER;
+
+\COPY Cajas(id_caja, peso, descripcion) FROM 'TablasE2/cajas.csv' DELIMITER ',' CSV HEADER;
+
+\COPY Clientes(id, rut, nombre,calle,numero_domicilio,comuna,region) FROM 'TablasE2/clientes.csv' DELIMITER ',' CSV HEADER;
+
+\COPY Venta(id, id_compra, id_producto) FROM 'TablasE2/venta.csv' DELIMITER ',' CSV HEADER;
+
+\COPY Compras(id_venta, id_cliente, id_tienda, cantidad, fecha) FROM 'TablasE2/compra.csv' DELIMITER ',' CSV HEADER;
+
+\COPY Vehiculos(id, capacidad_cargas, cantidad_personas, region) FROM 'TablasE2/vehiculos.csv' DELIMITER ',' CSV HEADER;
+
+\COPY Patentes(id_vehiculo, patente) FROM 'TablasE2/patentes.csv' DELIMITER ',' CSV HEADER;
+
+\COPY Administracion_Despachos(id, id_despacho, id_compra) FROM 'TablasE2/AdminDespachos.csv' DELIMITER ',' CSV HEADER;
+
+\COPY Despachos(id_entrega, fecha_entrega, ID_vehiculo) FROM 'TablasE2/despachos.csv' DELIMITER ',' CSV HEADER;
+
+\COPY Repartidores(id, nombre, edad, genero, id_vehiculo, region) FROM 'TablasE2/repartidores.csv' DELIMITER ',' CSV HEADER;
+
+\COPY Conductores(id, id_vehiculo, id_repartidor) FROM 'TablasE2/conductores.csv' DELIMITER ',' CSV HEADER;
+
+\COPY Licencias(id, id_repartidor,fecha_emision,fecha_expiracion,tipo) FROM 'TablasE2/licencias.csv' DELIMITER ',' CSV HEADER;
+
+\COPY Ruts(id_repartidor, Rut) FROM 'TablasE2/ruts.csv' DELIMITER ',' CSV HEADER;
+

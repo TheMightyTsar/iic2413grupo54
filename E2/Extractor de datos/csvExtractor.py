@@ -81,13 +81,18 @@ def extraer_datos():
     escribirC = [['id_venta', 'id_cliente', 'id_tienda', 'cantidad','fecha']]
 
     ID_venta = 0
+
+    ID_compras = []
     for linea in lineas_compras:
         if linea[0] != 'id_compra':
-            new_LV = [str(ID_venta), linea[0], linea[2]]
-            escribirV.append(new_LV)
-            new_LC = [str(ID_venta), linea[3], linea[4], linea[5], linea[1]]
-            escribirC.append(new_LC)
-            ID_venta +=1
+            if linea[3] in id_clientes:
+                new_LV = [str(ID_venta), linea[0], linea[2]]
+                ID_compras.append(linea[0])
+                escribirV.append(new_LV)
+                new_LC = [str(ID_venta), linea[3], linea[4], linea[5], linea[1]]
+                escribirC.append(new_LC)
+
+                ID_venta +=1
     escribir_csv('venta', escribirV)
     escribir_csv('compra', escribirC)
 
@@ -107,16 +112,17 @@ def extraer_datos():
 
     for linea in lineas_vehiculo:
         if linea[0] != 'id':
+            if linea[0] not in id_vehiculos:
 
-            id_vehiculos.append(linea[0])
+                id_vehiculos.append(linea[0])
 
 
-            num_region = random.randint(1, 2994)
+                num_region = random.randint(1, 2994)
 
-            new_linea_patente = [linea[0], linea[1]]
-            escribirP.append(new_linea_patente)
-            new_linea_vehiculo = [linea[0], linea[2], linea[3], lineas_lugares[num_region][1]]
-            escribirVE.append(new_linea_vehiculo)
+                new_linea_patente = [linea[0], linea[1]]
+                escribirP.append(new_linea_patente)
+                new_linea_vehiculo = [linea[0], linea[2], linea[3], lineas_lugares[num_region][1]]
+                escribirVE.append(new_linea_vehiculo)
     escribir_csv('patentes', escribirP)
     escribir_csv('vehiculos', escribirVE)
 
@@ -139,18 +145,19 @@ def extraer_datos():
 
     for linea in lineas_despachos:
         if linea[0] != 'id_despacho':
+            if linea[1] in ID_compras:
 
 
-            id_vehiculo = random.randint(0, max_id_vehiculos-1)
+                id_vehiculo = random.randint(0, max_id_vehiculos-1)
 
-            new_linea_admin_despachos = [str(id_entrega), linea[0], linea[1]]
-            new_admin_despachos.append(new_linea_admin_despachos)
+                new_linea_admin_despachos = [str(id_entrega), linea[0], linea[1]]
+                new_admin_despachos.append(new_linea_admin_despachos)
 
-            new_linea_despachos = [str(id_entrega), linea[2], str(id_vehiculos[id_vehiculo])]
-            new_despachos.append(new_linea_despachos)
+                new_linea_despachos = [str(id_entrega), linea[2], str(id_vehiculos[id_vehiculo])]
+                new_despachos.append(new_linea_despachos)
 
 
-            id_entrega += 1
+                id_entrega += 1
     escribir_csv('despachos', new_despachos)
     escribir_csv('AdminDespachos', new_admin_despachos)
 
@@ -171,21 +178,32 @@ def extraer_datos():
     Repartidores = [['id', 'nombre', 'edad', 'genero', 'id_vehiculo', 'region']]
     Conductores = [['id', 'id_vehiculo', 'id_repartidor']]
     RUTS = [['id_repartidor', 'RUT']]
-    Licencia = abrir_csv('licencias')
 
+    lineas_licencia = abrir_csv('licencias')
+    Licencia = [['id', 'id_repartidor', 'fecha_emision', 'fecha_expiracion', 'tipo']]
+    id_licencias = []
+    for linea in lineas_licencia:
+        if linea[0] != 'id':
+            if linea[0] not in id_licencias:
+                id_licencias.append(linea[0])
+                Licencia.append(linea)
     id_conductor = 0
+
+    id_repartidores = []
     for linea in lineas_repartidores:
         if linea[0] != 'id':
-            Nregion = random.randint(1, 2994)
+            if linea[0] not in id_repartidores:
+                id_repartidores.append(linea[0])
+                Nregion = random.randint(1, 2994)
 
-            Repartidores.append([linea[0], linea[1], linea[3], linea[4], linea[5], lineas_lugares[Nregion][1]])
+                Repartidores.append([linea[0], linea[1], linea[3], linea[4], linea[5], lineas_lugares[Nregion][1]])
 
-            if linea[6] == 'YES':
+                if linea[6] == 'YES':
 
-                Conductores.append([str(id_conductor),linea[5], linea[0]])
-                id_conductor += 1
+                    Conductores.append([str(id_conductor), linea[5], linea[0]])
+                    id_conductor += 1
 
-            RUTS.append([linea[0], linea[2]])
+                RUTS.append([linea[0], linea[2]])
 
     escribir_csv('licencias', Licencia)
     escribir_csv('repartidores', Repartidores)
