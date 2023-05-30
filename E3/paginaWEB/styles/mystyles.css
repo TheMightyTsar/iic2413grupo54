@@ -10,6 +10,10 @@ input[type=text] {
     font-size: 20px;
     background-color: #af9efc;
 }
+input[type=password] {
+    font-size: 20px;
+    background-color: #af9efc;
+}
 
 input[type=submit] {
     width: 20em;
