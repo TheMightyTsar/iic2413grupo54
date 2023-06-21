@@ -13,5 +13,7 @@ importante: utilizar procedimientos almacenados
 
 ## Como funcionan la WEB
 
+#### CREATE TABLE IF NOT EXISTS TABLE_NAME (column_name datatype, column_name datatype);
+(codigo que crea una)
 #### index.php maneja el login
 #### view_handler carga que tipo de usuario es y carga view correspondiente
