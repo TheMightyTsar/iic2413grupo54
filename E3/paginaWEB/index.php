@@ -16,5 +16,37 @@
 </form>
 
 <br>
+<form method="post" action="">
+    <input type="submit" name="ejecutar" value="importar usuarios">
+</form>
 
+<?php
+// Verificar si se ha enviado el formulario
+if (isset($_POST['ejecutar'])) {
+    // Realizar la conexión a la base de datos
+    $host = "nombre_host";
+    $port = "puerto";
+    $dbname = "nombre_base_datos";
+    $user = "usuario";
+    $password = "contraseña";
+
+    $conn = pg_connect("host=$host port=$port dbname=$dbname user=$user password=$password");
+    if (!$conn) {
+        echo "Error al conectar a la base de datos.";
+        exit;
+    }
+
+    // Ejecutar la consulta
+    $query = "SELECT * FROM tabla";
+    $result = pg_query($conn, $query);
+
+    // Mostrar los resultados de la consulta
+    while ($row = pg_fetch_assoc($result)) {
+        echo $row['columna1'] . " - " . $row['columna2'] . "<br>";
+    }
+
+    // Cerrar la conexión
+    pg_close($conn);
+}
+?>
 </body>
