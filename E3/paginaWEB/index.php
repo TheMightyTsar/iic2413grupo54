@@ -113,7 +113,7 @@
 <?php
 // Verificar si se ha enviado el formulario
 if (isset($_POST['ejecutar'])) {
-    // Realizar la conexión a la base de datos
+// Realizar la conexión a la base de datos
     $host = "nombre_host";
     $port = "puerto";
     $dbname = "nombre_base_datos";
@@ -126,17 +126,68 @@ if (isset($_POST['ejecutar'])) {
         exit;
     }
 
-    // Ejecutar la consulta
-    $query = "CREATE TABLE IF NOT EXISTS TABLE_NAME (column_name datatype, column_name datatype);";
-    $result = pg_query($conn, $query);
+// Consulta para crear la tabla solo si no existe previamente
+    $createTableQuery = "CREATE TABLE IF NOT EXISTS Usuarios (
+    id INTEGER PRIMARY KEY,
+    usuario TEXT,
+    password TEXT
+)";
+    $createTableResult = pg_query($conn, $createTableQuery);
 
-    // Mostrar los resultados de la consulta
-    while ($row = pg_fetch_assoc($result)) {
-        echo $row['columna1'] . " - " . $row['columna2'] . "<br>";
+    $count = "SELECT COUNT(*) FROM Usuarios";
+    $result = pg_query($conn, $count);
+    $row = pg_fetch_row($result);
+    $numFilas = $row[0];
+
+
+    if ($numFilas == 0) {
+        // Obtener los datos de la tabla "Clientes"
+        $query = "SELECT ID, nombre FROM Clientes";
+        $result = pg_query($conn, $query);
+
+        $insertQuery = "INSERT INTO Usuarios (id, usuario, password) VALUES (1, 'ADMIN', 'admin' )";
+        $insertResult = pg_query($conn, $insertQuery);
+
+        if (!$result) {
+            echo "Error al obtener datos de la tabla 'Clientes'.";
+            exit;
+        }
+
+        // Recorrer los datos de la tabla "Clientes" y poblar la tabla "Usuarios"
+        while ($row = pg_fetch_assoc($result)) {
+            $idCliente = $row['ID'];
+            $nombreCliente = $row['nombre'];
+            $passwordAleatoria = generarPasswordAleatoria(); // Función para generar una contraseña aleatoria
+
+            // Insertar los datos en la tabla "Usuarios"
+            $insertQuery = "INSERT INTO Usuarios (id, usuario, password) VALUES ($idCliente, '$nombreCliente', '$passwordAleatoria')";
+            $insertResult = pg_query($conn, $insertQuery);
+
+            if (!$insertResult) {
+                echo "Error al insertar datos en la tabla 'Usuarios' para el cliente con ID $idCliente.";
+            }
+        }
+
+        echo "La tabla 'Usuarios' ha sido poblada exitosamente.";
     }
 
-    // Cerrar la conexión
+// Cerrar la conexión
     pg_close($conn);
+
+// Función para generar una contraseña aleatoria
+    function generarPasswordAleatoria()
+    {
+        $caracteres = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        $longitud = 8;
+        $password = "";
+
+        for ($i = 0; $i < $longitud; $i++) {
+            $password .= $caracteres[rand(0, strlen($caracteres) - 1)];
+        }
+
+        return $password;
+    }
 }
+
 ?>
 </body>
