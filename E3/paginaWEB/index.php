@@ -111,82 +111,89 @@
 </form>
 
 <?php
+function generarPasswordAleatoria()
+{
+    $caracteres = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    $longitud = 8;
+    $password = "";
+
+    for ($i = 0; $i < $longitud; $i++) {
+        $password .= $caracteres[rand(0, strlen($caracteres) - 1)];
+    }
+
+    return $password;
+}
 // Verificar si se ha enviado el formulario
 if (isset($_POST['ejecutar'])) {
-// Realizar la conexión a la base de datos
-    $host = "nombre_host";
-    $port = "puerto";
-    $dbname = "nombre_base_datos";
-    $user = "usuario";
-    $password = "contraseña";
+// Verificar si se ha enviado el formulario
+    if (isset($_POST['ejecutar'])) {
+        // Configuración de la conexión a la base de datos
+        $host = 'localhost';
+        $port = '5432';
+        $dbname = 'grupo54e3';
+        $user = 'grupo54';
+        $password = '!SVGrupo54';
 
-    $conn = pg_connect("host=$host port=$port dbname=$dbname user=$user password=$password");
-    if (!$conn) {
-        echo "Error al conectar a la base de datos.";
-        exit;
-    }
+        // Cadena de conexión DSN para PostgreSQL
+        $dsn = "pgsql:host=$host;port=$port;dbname=$dbname;user=$user;password=$password";
 
-// Consulta para crear la tabla solo si no existe previamente
-    $createTableQuery = "CREATE TABLE IF NOT EXISTS Usuarios (
-    id INTEGER PRIMARY KEY,
-    usuario TEXT,
-    password TEXT
-)";
-    $createTableResult = pg_query($conn, $createTableQuery);
+        try {
+            // Crear una instancia de PDO para la conexión
+            $pdo = new PDO($dsn);
 
-    $count = "SELECT COUNT(*) FROM Usuarios";
-    $result = pg_query($conn, $count);
-    $row = pg_fetch_row($result);
-    $numFilas = $row[0];
+            // Establecer atributos de la conexión (opcional)
+            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+            // Consulta para crear la tabla solo si no existe previamente
+            $createTableQuery = "CREATE TABLE IF NOT EXISTS Usuarios (id INTEGER PRIMARY KEY, usuario TEXT, password TEXT)";
+            $createTableResult = $pdo->exec($createTableQuery);
+
+            $countQuery = "SELECT COUNT(*) FROM Usuarios";
+            $countResult = $pdo->query($countQuery);
+            $numFilas = $countResult->fetchColumn();
+
+            if ($numFilas == 0) {
+                // Obtener los datos de la tabla "Clientes"
+                $query = "SELECT id, nombre FROM clientes";
+
+                $result = $pdo -> prepare($query);
+                $result -> execute();
+                $clientes = $result -> fetchAll();
 
 
-    if ($numFilas == 0) {
-        // Obtener los datos de la tabla "Clientes"
-        $query = "SELECT ID, nombre FROM Clientes";
-        $result = pg_query($conn, $query);
+                $insertQuery = "INSERT INTO Usuarios (id, usuario, password) VALUES (1, 'ADMIN', 'admin')";
+                $insertResult = $pdo->exec($insertQuery);
 
-        $insertQuery = "INSERT INTO Usuarios (id, usuario, password) VALUES (1, 'ADMIN', 'admin' )";
-        $insertResult = pg_query($conn, $insertQuery);
 
-        if (!$result) {
-            echo "Error al obtener datos de la tabla 'Clientes'.";
-            exit;
-        }
+                // Recorrer los datos de la tabla "Clientes" y poblar la tabla "Usuarios"
+                foreach($clientes as $cliente) {
+                    $idCliente = $cliente['id'];
+                    $nombreCliente = $cliente['nombre'];
+                    $passwordAleatoria = generarPasswordAleatoria(); // Función para generar una contraseña aleatoria
 
-        // Recorrer los datos de la tabla "Clientes" y poblar la tabla "Usuarios"
-        while ($row = pg_fetch_assoc($result)) {
-            $idCliente = $row['ID'];
-            $nombreCliente = $row['nombre'];
-            $passwordAleatoria = generarPasswordAleatoria(); // Función para generar una contraseña aleatoria
+                    // Insertar los datos en la tabla "Usuarios"
+                    $insertQuery = "INSERT INTO Usuarios (id, usuario, password) VALUES ($idCliente, '$nombreCliente', '$passwordAleatoria')";
+                    $insertResult = $pdo->exec($insertQuery);
 
-            // Insertar los datos en la tabla "Usuarios"
-            $insertQuery = "INSERT INTO Usuarios (id, usuario, password) VALUES ($idCliente, '$nombreCliente', '$passwordAleatoria')";
-            $insertResult = pg_query($conn, $insertQuery);
+                    if (!$insertResult) {
+                        echo "<h1>Error al insertar datos en la tabla 'Usuarios' para el cliente con ID $idCliente.</h1>";
 
-            if (!$insertResult) {
-                echo "Error al insertar datos en la tabla 'Usuarios' para el cliente con ID $idCliente.";
+                    }
+                }
+
+                echo "<h1>La tabla 'Usuarios' ha sido poblada exitosamente.</h1>";
             }
-        }
 
-        echo "La tabla 'Usuarios' ha sido poblada exitosamente.";
+
+            // Cerrar la conexión
+            $pdo = null;
+        } catch (PDOException $e) {
+            echo "Error de conexión: " . $e->getMessage();
+        }
     }
 
-// Cerrar la conexión
-    pg_close($conn);
 
-// Función para generar una contraseña aleatoria
-    function generarPasswordAleatoria()
-    {
-        $caracteres = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-        $longitud = 8;
-        $password = "";
 
-        for ($i = 0; $i < $longitud; $i++) {
-            $password .= $caracteres[rand(0, strlen($caracteres) - 1)];
-        }
-
-        return $password;
-    }
 }
 
 ?>
