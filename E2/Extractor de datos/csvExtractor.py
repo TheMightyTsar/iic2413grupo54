@@ -66,8 +66,13 @@ def extraer_datos():
 
     for linea in lineas_clientes:
         if linea[0] not in id_clientes:
+
             id_clientes.append(linea[0])
-            new_lineas_clientes.append(linea)
+            agregar = [linea[0],linea[2], linea[1], linea[3],linea[4], linea[5], linea[6]]
+            print(agregar)
+            new_lineas_clientes.append(agregar)
+            if linea[0] == '1':
+                print("Usuario con ID 0")
 
     escribir_csv('clientes', new_lineas_clientes)
 

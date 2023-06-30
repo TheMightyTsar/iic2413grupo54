@@ -123,9 +123,9 @@ function generarPasswordAleatoria()
 
     return $password;
 }
-// Verificar si se ha enviado el formulario
+
 if (isset($_POST['ejecutar'])) {
-// Verificar si se ha enviado el formulario
+
     if (isset($_POST['ejecutar'])) {
         // Configuración de la conexión a la base de datos
         $host = 'localhost';
@@ -134,7 +134,7 @@ if (isset($_POST['ejecutar'])) {
         $user = 'grupo54';
         $password = '!SVGrupo54';
 
-        // Cadena de conexión DSN para PostgreSQL
+
         $dsn = "pgsql:host=$host;port=$port;dbname=$dbname;user=$user;password=$password";
 
         try {
@@ -182,10 +182,14 @@ if (isset($_POST['ejecutar'])) {
                 }
 
                 echo "<h1>La tabla 'Usuarios' ha sido poblada exitosamente.</h1>";
+            } else {
+
+                echo "<h1>La tabla 'Usuarios' ya habia sido creada.</h1>";
+
             }
 
 
-            // Cerrar la conexión
+
             $pdo = null;
         } catch (PDOException $e) {
             echo "Error de conexión: " . $e->getMessage();

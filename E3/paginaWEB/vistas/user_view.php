@@ -87,52 +87,47 @@
         max-width: 90%;
     }
 </style>
+<body>
 <?php
-// Realizar la conexión a la base de datos
-$host = "nombre_host";
-$port = "puerto";
-$dbname = "nombre_base_datos";
-$user = "usuario";
-$password = "contraseña";
+$host = 'localhost';
+$port = '5432';
+$dbname = 'grupo54e3';
+$user = 'grupo54';
+$password = '!SVGrupo54';
 
-$conn = pg_connect("host=$host port=$port dbname=$dbname user=$user password=$password");
 
-// Obtener el nombre del cliente desde la vista
-$nombreCliente = $_POST['nombre_cliente']; // Reemplaza $_POST['nombre_cliente'] con la forma en que obtienes el nombre desde la vista
+$dsn = "pgsql:host=$host;port=$port;dbname=$dbname;user=$user;password=$password";
 
-// Consulta para obtener los datos del cliente por su nombre
-$query = "SELECT * FROM Clientes WHERE nombre = '$nombreCliente'";
-$result = pg_query($conn, $query);
+try {
+// Crear una instancia de PDO para la conexión
+    $pdo = new PDO($dsn);
 
-if (!$result) {
-    echo "Error al obtener los datos del cliente.";
-    exit;
+// Establecer atributos de la conexión (opcional)
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $nombre = $_POST['nombre'];
+    $query = "SELECT * FROM clientes WHERE nombre = '$nombre'";
+
+    $result = $pdo -> prepare($query);
+    $result -> execute();
+    $usuario = $result -> fetch();
+    $username = $usuario['nombre'];
+    $calle = $usuario['calle'];
+    $numero = $usuario['numero_domicilio'];
+    echo "<h1>$username </h1>";
+    echo "<h2>$calle $numero</h2>";
+
+    # boton revisar compras
+
+    #boton hacer compras, buscar productos segun categoria
+
+
+    $pdo = null;
+} catch (PDOException $e) {
+    echo "Error de conexión: " . $e->getMessage();
 }
-
-// Verificar si se encontraron resultados
-if (pg_num_rows($result) > 0) {
-    // Recorrer los resultados y mostrar los datos del cliente
-    while ($row = pg_fetch_assoc($result)) {
-        $idCliente = $row['ID'];
-        $rutCliente = $row['rut'];
-        $nombreCliente = $row['nombre'];
-        $calleCliente = $row['calle'];
-        $numeroCliente = $row['numero_domicilio'];
-        $comunaCliente = $row['comuna'];
-        $regionCliente = $row['region'];
-
-        echo "ID: $idCliente<br>";
-        echo "RUT: $rutCliente<br>";
-        echo "Nombre: $nombreCliente<br>";
-        echo "Calle: $calleCliente<br>";
-        echo "Número: $numeroCliente<br>";
-        echo "Comuna: $comunaCliente<br>";
-        echo "Región: $regionCliente<br>";
-    }
-} else {
-    echo "No se encontraron datos para el cliente con el nombre: $nombreCliente";
-}
-
-// Cerrar la conexión
-pg_close($conn);
 ?>
+
+
+</body>
+
+<?php include('templates/footer.html');   ?>
