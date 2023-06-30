@@ -105,28 +105,73 @@ try {
 
 // Establecer atributos de la conexión (opcional)
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $id = $_POST['id'];
+    # $id = $_POST['id'];
+    $id = 966;
     $query = "SELECT * FROM clientes WHERE id = $id";
+    echo "<h1>Hizo consulta 1</h1>";
 
     $result = $pdo -> prepare($query);
     $result -> execute();
     $usuario = $result -> fetch();
     $username = $usuario['nombre'];
-    echo "<h1>$username </h1>";
+    echo "<h1>$username</h1>";
 
-    $qproductos = "SELECT * FROM compras WHERE id_cliente = $id";
-    $result = $pdo -> prepare($qproductos);
-    $result -> execute();
-    $compras = $result -> fetchAll();
 
-    echo "<table>";
-    # ver id de la compra/venta nombre productos, precios, numero de cajas cada producto, precio total y despacho
+    $query = "SELECT C.id_venta 
+          FROM Venta V 
+          INNER JOIN Compras C ON V.id = C.id_venta 
+          WHERE C.id_cliente = $id";
+
+    $result = $pdo->prepare($query);
+    $result->execute();
+    $carritos = $result -> fetchAll();
+    echo "<h1>Hizo consulta 2</h1>";
+    echo "<h1>$carritos</h1>";
+    foreach ($carritos as $carrito){
+        echo "<h1>Loop</h1>";
+
+        echo "<table>";
+        echo "<tr>";
+        echo "<th> ID de la compra </th>";
+        #echo "<th> nombre producto </th>";
+        #echo "<th> cantidad </th>";
+        #echo "<th> cajas </th>";
+        #echo "<th> costo </th>";
+
+        echo "</tr>";
+
+        $query = "SELECT *
+          FROM Venta V 
+          INNER JOIN Compras C ON V.ID = C.ID_venta 
+          WHERE C.id_cliente = $id AND V.id_compra = $carrito[0]";
+        $result = $pdo->prepare($query);
+        $result->execute();
+        $ventas = $result ->fetchAll();
+        echo "<h1>Hizo consulta 3</h1>";
+
+        foreach ($ventas as $venta){
+            echo "<h1>$venta</h1>";
+            # ver id de la compra/venta nombre productos, precios, numero de cajas cada producto, precio total y despacho
+            echo "<tr> <td> $carrito</td>";
+        }
+
+
+
+
+
+        echo "</table>";
+
+    }
+
+
+
 
 
 
 
     $pdo = null;
 } catch (PDOException $e) {
+    echo "<h1>F fallo</h1>";
     echo "Error de conexión: " . $e->getMessage();
 }
 ?>
