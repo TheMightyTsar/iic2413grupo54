@@ -30,8 +30,6 @@ id(Primary Key **generada codigo), id_compra, id_producto
 
 
 
-
-
 Vehiculos  (vehiculos.csv)
 id(Primary key), capacidad_carga(Toneladas), cantidad_personas, region(**añadir en code)
 [Listo]
@@ -71,8 +69,10 @@ CREATE TABLE Productos (ID INT PRIMARY KEY, nombre TEXT, precio INT, numero_caja
 CREATE TABLE DistribucionCajas (ID_caja INT PRIMARY KEY, id_producto INT, n_caja INT, FOREIGN KEY (id_producto) REFERENCES Productos (ID));
 CREATE TABLE Cajas (ID_caja INT PRIMARY KEY, peso FLOAT, descripcion TEXT, FOREIGN KEY (id_caja) REFERENCES DistribucionCajas (ID_caja) );
 CREATE TABLE Clientes (ID INT PRIMARY KEY, rut TEXT, nombre TEXT, calle TEXT, numero_domicilio INT, comuna TEXT, region TEXT);
+
 CREATE TABLE Venta (ID INT PRIMARY KEY, id_compra INT, id_producto INT, FOREIGN KEY (id_producto) REFERENCES Productos (ID) );
 CREATE TABLE Compras (ID_venta INT PRIMARY KEY, id_cliente INT, id_tienda INT, cantidad INT,  fecha TEXT, FOREIGN KEY (id_cliente) REFERENCES Clientes (ID), FOREIGN KEY (id_venta) REFERENCES Venta (ID) );
+
 CREATE TABLE Vehiculos (ID INT PRIMARY KEY, capacidad_cargas INT, cantidad_personas INT, region TEXT);
 CREATE TABLE Patentes (ID_vehiculo INT PRIMARY KEY, patente TEXT, FOREIGN KEY (ID_vehiculo) REFERENCES Vehiculos (ID));
 CREATE TABLE Administracion_Despachos (ID INT PRIMARY KEY, id_despacho INT, ID_compra INT);

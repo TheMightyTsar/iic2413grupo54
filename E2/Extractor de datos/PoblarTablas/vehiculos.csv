@@ -1,201 +1,201 @@
 id,capacidad_carga(toneladas),cantidad_personas,region
-102,25,1,Oregon
-161,23,4,Arizona
-19,9,4,Mississippi
-133,18,1,Florida
-152,30,1,North Dakota
-85,13,2,Nevada
-163,28,1,North Carolina
-153,27,4,West Virginia
-86,17,3,Hawaii
-42,11,3,Mississippi
-113,9,3,North Dakota
-105,7,4,North Carolina
-181,19,1,Maryland
-43,29,2,Louisiana
-127,20,4,Texas
-39,27,4,New Hampshire
-197,8,2,Kentucky
-4,9,1,Maryland
-66,12,2,West Virginia
-75,15,4,Kentucky
-142,29,3,Ohio
-69,18,1,Utah
+102,25,1,Utah
+161,23,4,Kansas
+19,9,4,Massachusetts
+133,18,1,South Dakota
+152,30,1,Colorado
+85,13,2,Vermont
+163,28,1,New Mexico
+153,27,4,California
+86,17,3,Alabama
+42,11,3,South Carolina
+113,9,3,Texas
+105,7,4,California
+181,19,1,Washington
+43,29,2,Nevada
+127,20,4,California
+39,27,4,Colorado
+197,8,2,Mississippi
+4,9,1,Oklahoma
+66,12,2,Michigan
+75,15,4,New York
+142,29,3,North Dakota
+69,18,1,Mississippi
 103,12,1,Utah
-44,24,1,Wyoming
-122,8,3,Kentucky
-58,22,2,Louisiana
-115,17,2,Minnesota
-61,27,1,Pennsylvania
-23,26,1,Virginia
-11,27,3,Louisiana
-134,15,3,California
-91,22,1,Mississippi
-110,20,3,Florida
-126,11,3,Utah
-5,16,1,Michigan
-38,8,1,South Dakota
-36,19,1,Utah
-30,29,4,New Hampshire
-185,14,4,Nevada
-59,20,3,Idaho
-41,16,4,Illinois
-33,19,2,Nebraska
-28,7,3,Michigan
-154,15,2,Minnesota
-143,13,2,Washington
-68,28,1,Nevada
-189,18,4,Maine
-162,30,4,Utah
-199,20,1,Maryland
-159,12,1,Vermont
-24,9,3,Colorado
-79,17,3,California
-131,8,4,Colorado
-111,15,3,Colorado
-55,11,3,New York
-135,13,1,Delaware
-16,25,1,Iowa
-22,28,4,North Dakota
-48,26,3,South Dakota
-3,26,4,Kentucky
-120,10,3,Rhode Island
-176,14,4,Alaska
-52,25,1,Alabama
+44,24,1,Maryland
+122,8,3,Alaska
+58,22,2,Idaho
+115,17,2,New Mexico
+61,27,1,Wisconsin
+23,26,1,Maryland
+11,27,3,Utah
+134,15,3,Arkansas
+91,22,1,South Carolina
+110,20,3,Nevada
+126,11,3,New Hampshire
+5,16,1,New York
+38,8,1,Missouri
+36,19,1,Ohio
+30,29,4,California
+185,14,4,Missouri
+59,20,3,Minnesota
+41,16,4,Wyoming
+33,19,2,New Mexico
+28,7,3,Nebraska
+154,15,2,Utah
+143,13,2,South Dakota
+68,28,1,Iowa
+189,18,4,Rhode Island
+162,30,4,Alabama
+199,20,1,New Jersey
+159,12,1,Washington
+24,9,3,Oregon
+79,17,3,Illinois
+131,8,4,Maine
+111,15,3,Arizona
+55,11,3,South Dakota
+135,13,1,Maryland
+16,25,1,North Carolina
+22,28,4,Nevada
+48,26,3,Missouri
+3,26,4,Alaska
+120,10,3,Kentucky
+176,14,4,Texas
+52,25,1,Kentucky
 64,15,2,Idaho
-188,19,2,Tennessee
-130,29,2,Wisconsin
-169,27,4,Louisiana
-194,7,3,New Mexico
-9,29,1,Indiana
-158,15,4,New Hampshire
-178,29,1,Illinois
-94,30,4,Louisiana
-53,12,4,Alaska
-57,22,4,Oklahoma
-54,7,4,Maine
-190,8,1,Nebraska
-179,10,4,Nevada
-45,10,4,Wyoming
-6,15,2,Wisconsin
-35,22,4,Nevada
-195,9,2,Oklahoma
-172,29,1,New Hampshire
-137,20,3,South Dakota
-96,24,1,Kansas
-8,16,1,Nevada
-21,27,3,Ohio
-186,29,1,Alaska
-49,12,4,Ohio
-147,14,1,Iowa
-108,25,1,Illinois
-83,11,4,Alaska
-74,7,4,California
-78,21,1,South Carolina
-128,16,1,Indiana
-173,25,3,Louisiana
-146,17,3,Utah
-17,16,2,Mississippi
-18,28,4,West Virginia
-70,25,1,Ohio
-118,18,3,South Dakota
-183,27,2,West Virginia
+188,19,2,Hawaii
+130,29,2,North Carolina
+169,27,4,Oklahoma
+194,7,3,New York
+9,29,1,Missouri
+158,15,4,Ohio
+178,29,1,Wisconsin
+94,30,4,New Mexico
+53,12,4,Iowa
+57,22,4,Pennsylvania
+54,7,4,Nebraska
+190,8,1,Rhode Island
+179,10,4,New York
+45,10,4,Louisiana
+6,15,2,Nevada
+35,22,4,New Jersey
+195,9,2,Arizona
+172,29,1,Pennsylvania
+137,20,3,California
+96,24,1,Wyoming
+8,16,1,Idaho
+21,27,3,Iowa
+186,29,1,Nevada
+49,12,4,Alaska
+147,14,1,Montana
+108,25,1,Oklahoma
+83,11,4,Oklahoma
+74,7,4,Mississippi
+78,21,1,Arkansas
+128,16,1,Ohio
+173,25,3,Nevada
+146,17,3,Arkansas
+17,16,2,Missouri
+18,28,4,Utah
+70,25,1,Vermont
+118,18,3,Illinois
+183,27,2,Montana
 144,12,1,New York
-192,11,4,Wyoming
-31,7,3,New Mexico
-12,27,4,Idaho
-166,15,3,Texas
-76,28,3,New Jersey
-56,10,2,Maryland
-150,19,3,Utah
-98,7,4,Wyoming
+192,11,4,Maryland
+31,7,3,Nevada
+12,27,4,North Dakota
+166,15,3,Colorado
+76,28,3,Oklahoma
+56,10,2,Texas
+150,19,3,Mississippi
+98,7,4,Kentucky
 0,16,1,North Dakota
-174,25,3,Florida
-191,8,3,Vermont
-93,9,3,New Mexico
-37,22,4,Maine
-1,12,3,Hawaii
-114,16,4,Mississippi
-101,11,3,Alabama
-149,12,2,Ohio
-109,17,1,Illinois
-73,17,4,Indiana
-156,21,3,Idaho
-193,8,3,Ohio
-29,8,1,Oregon
-140,15,3,Illinois
-40,11,1,Kansas
-32,22,2,Rhode Island
-90,24,3,Tennessee
-13,7,1,North Carolina
-145,28,3,Indiana
-104,18,1,Wyoming
-170,17,4,Vermont
-60,20,4,Wyoming
-7,29,1,West Virginia
-27,28,3,Pennsylvania
-167,26,1,New Jersey
-119,23,4,Kentucky
-89,23,4,Georgia
-10,26,4,Oregon
+174,25,3,Nevada
+191,8,3,Hawaii
+93,9,3,Illinois
+37,22,4,Wisconsin
+1,12,3,Wyoming
+114,16,4,Arizona
+101,11,3,Virginia
+149,12,2,Illinois
+109,17,1,Colorado
+73,17,4,Mississippi
+156,21,3,New York
+193,8,3,Nevada
+29,8,1,South Dakota
+140,15,3,Indiana
+40,11,1,Wisconsin
+32,22,2,North Dakota
+90,24,3,Washington
+13,7,1,Alaska
+145,28,3,North Dakota
+104,18,1,Wisconsin
+170,17,4,Kansas
+60,20,4,Kentucky
+7,29,1,Maryland
+27,28,3,Colorado
+167,26,1,California
+119,23,4,Iowa
+89,23,4,Texas
+10,26,4,Illinois
 187,14,1,Colorado
-112,11,4,Hawaii
-148,28,1,Vermont
-107,22,2,Rhode Island
-46,10,1,California
-141,20,2,Oregon
-77,12,1,Nebraska
-123,8,1,Florida
-139,15,4,Utah
-124,28,1,Idaho
-116,29,2,New Mexico
-65,23,1,Illinois
-51,27,1,Washington
-125,12,1,Nevada
-129,21,1,Ohio
-80,17,2,Alabama
-34,12,2,Oregon
-25,27,2,Wisconsin
-106,12,2,Maine
-20,14,4,Washington
-117,14,1,Washington
-177,28,1,North Carolina
-132,9,4,Pennsylvania
-136,18,3,Wyoming
-180,20,3,New Hampshire
-88,22,4,Vermont
-72,9,3,Alaska
-26,26,3,Wisconsin
-50,25,4,Florida
-97,20,4,New Hampshire
-175,19,3,Colorado
-164,14,2,Illinois
-84,30,2,Ohio
-81,27,4,Maryland
-15,8,2,Hawaii
-160,7,3,Alabama
-62,26,4,Pennsylvania
-67,28,4,Alaska
-165,28,1,Kansas
-100,11,1,South Dakota
-47,11,3,Oklahoma
-151,14,3,Arkansas
-157,25,2,Wyoming
-168,21,4,Washington
-95,17,3,Indiana
-198,27,3,Indiana
-2,11,4,Maryland
-121,17,2,New Hampshire
-99,21,1,Hawaii
-82,20,2,Colorado
-92,30,4,Alaska
-71,23,3,New Jersey
+112,11,4,South Carolina
+148,28,1,Tennessee
+107,22,2,Texas
+46,10,1,North Dakota
+141,20,2,Kentucky
+77,12,1,Kansas
+123,8,1,Virginia
+139,15,4,Nebraska
+124,28,1,South Dakota
+116,29,2,New Jersey
+65,23,1,New Hampshire
+51,27,1,South Dakota
+125,12,1,New Hampshire
+129,21,1,California
+80,17,2,Rhode Island
+34,12,2,Massachusetts
+25,27,2,New Hampshire
+106,12,2,Iowa
+20,14,4,Pennsylvania
+117,14,1,Illinois
+177,28,1,Iowa
+132,9,4,Hawaii
+136,18,3,Tennessee
+180,20,3,Wyoming
+88,22,4,Wyoming
+72,9,3,Georgia
+26,26,3,New York
+50,25,4,New Jersey
+97,20,4,Nebraska
+175,19,3,West Virginia
+164,14,2,Vermont
+84,30,2,New Jersey
+81,27,4,Virginia
+15,8,2,Missouri
+160,7,3,Montana
+62,26,4,Iowa
+67,28,4,Massachusetts
+165,28,1,Texas
+100,11,1,Nevada
+47,11,3,Indiana
+151,14,3,Idaho
+157,25,2,Montana
+168,21,4,South Dakota
+95,17,3,Iowa
+198,27,3,Maine
+2,11,4,North Dakota
+121,17,2,Montana
+99,21,1,Colorado
+82,20,2,Hawaii
+92,30,4,New Hampshire
+71,23,3,Illinois
 155,22,1,Kentucky
-63,22,2,Colorado
-14,28,4,Arizona
-138,9,3,Oregon
-196,29,4,South Carolina
-184,11,1,Maryland
-182,19,3,Florida
-171,29,1,North Dakota
-87,17,4,Virginia
+63,22,2,Kentucky
+14,28,4,Kentucky
+138,9,3,Pennsylvania
+196,29,4,Arkansas
+184,11,1,Utah
+182,19,3,Alaska
+171,29,1,Iowa
+87,17,4,Mississippi

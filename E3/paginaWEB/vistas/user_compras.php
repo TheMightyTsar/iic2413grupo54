@@ -90,6 +90,10 @@
     <body>
     <h1>Mis compras</h1>
 <?php
+$dbname2 = 'grupo47e3';
+$user2 = 'grupo47';
+$password2 = 'clavemuysegura';
+
 $host = 'localhost';
 $port = '5432';
 $dbname = 'grupo54e3';
@@ -98,17 +102,20 @@ $password = '!SVGrupo54';
 
 
 $dsn = "pgsql:host=$host;port=$port;dbname=$dbname;user=$user;password=$password";
+$dsn2 = "pgsql:host=$host;port=$port;dbname=$dbname2;user=$user2;password=$password2";
 
 try {
 // Crear una instancia de PDO para la conexión
     $pdo = new PDO($dsn);
+    $pdo2 = new PDO($dsn2);
 
 // Establecer atributos de la conexión (opcional)
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    # $id = $_POST['id'];
-    $id = 966;
+    $pdo2->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $id = $_POST['id'];
+    # $id = 966;
     $query = "SELECT * FROM clientes WHERE id = $id";
-    echo "<h1>Hizo consulta 1</h1>";
+
 
     $result = $pdo -> prepare($query);
     $result -> execute();
@@ -117,7 +124,7 @@ try {
     echo "<h1>$username</h1>";
 
 
-    $query = "SELECT C.id_venta 
+    $query = "SELECT V.id_compra 
           FROM Venta V 
           INNER JOIN Compras C ON V.id = C.id_venta 
           WHERE C.id_cliente = $id";
@@ -125,49 +132,84 @@ try {
     $result = $pdo->prepare($query);
     $result->execute();
     $carritos = $result -> fetchAll();
-    echo "<h1>Hizo consulta 2</h1>";
-    echo "<h1>$carritos</h1>";
-    foreach ($carritos as $carrito){
-        echo "<h1>Loop</h1>";
+
+
+
+    # ver para que no se repitan los id_compra
+    $id_compras = [];
+    foreach ($carritos as $carrito) {
+        $id_compra = $carrito['id_compra'];
+
+        // Verificar si el id_compra ya existe en el array
+        if (!in_array($id_compra, $id_compras)) {
+            // Agregar el id_compra al array
+            $id_compras[] = $id_compra;
+        }
+    }
+
+
+    foreach ($id_compras as $compra){
+        $costototal = 0;
+
+        echo "<br>";
+        echo "<br>";
+
 
         echo "<table>";
         echo "<tr>";
         echo "<th> ID de la compra </th>";
-        #echo "<th> nombre producto </th>";
-        #echo "<th> cantidad </th>";
-        #echo "<th> cajas </th>";
-        #echo "<th> costo </th>";
+        echo "<th> nombre producto </th>";
+        echo "<th> cantidad </th>";
+        echo "<th> cajas </th>";
+        echo "<th> costo </th>";
 
         echo "</tr>";
 
         $query = "SELECT *
           FROM Venta V 
           INNER JOIN Compras C ON V.ID = C.ID_venta 
-          WHERE C.id_cliente = $id AND V.id_compra = $carrito[0]";
+          INNER JOIN Productos P ON V.id_producto = P.ID
+          WHERE C.id_cliente = $id AND V.id_compra = $compra";
         $result = $pdo->prepare($query);
         $result->execute();
         $ventas = $result ->fetchAll();
-        echo "<h1>Hizo consulta 3</h1>";
+
 
         foreach ($ventas as $venta){
-            echo "<h1>$venta</h1>";
+
+
+
             # ver id de la compra/venta nombre productos, precios, numero de cajas cada producto, precio total y despacho
-            echo "<tr> <td> $carrito</td>";
+            $nombre = $venta['nombre'];
+            $cantidad = intval($venta['cantidad']);
+            $cajas = intval($venta['numero_cajas']) * $cantidad;
+
+
+            $tienda = $venta['id_tienda'];
+            $producto_id = $venta['id_producto'];
+
+            $query = "SELECT descuento FROM ofertas WHERE tienda_id = $tienda AND producto_id = $producto_id";
+            $result = $pdo2->prepare($query);
+            $result->execute();
+            $oferta = $result ->fetch();
+            if (is_null($oferta[0])|| $oferta[0] == 0){
+                $precio = $cantidad * intval($venta['precio']);
+
+            }else{
+                $precio = ($cantidad * intval($venta['precio'])) * $oferta[0]/ 100 ;
+
+            }
+            $costototal += $precio;
+
+             # ver para el precio con las ofertas
+            $fecha = $venta['fecha'];
+            echo "<tr> <td> $compra</td> <td>$nombre</td> <td>$cantidad</td> <td>$cajas</td> <td>$precio </td></tr>";
         }
 
-
-
-
-
         echo "</table>";
+        echo "<h2>Costo total = $costototal $ </h2>";
 
     }
-
-
-
-
-
-
 
     $pdo = null;
 } catch (PDOException $e) {
@@ -175,4 +217,5 @@ try {
     echo "Error de conexión: " . $e->getMessage();
 }
 ?>
-    </body>
+<br>
+<?php include('../templates/footer.html');   ?>

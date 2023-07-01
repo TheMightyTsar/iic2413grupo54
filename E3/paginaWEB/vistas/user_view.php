@@ -117,6 +117,10 @@ try {
     echo "<h2>$calle $numero</h2>";
 
     # boton revisar compras
+    echo '<form action="user_compras.php" method="post">';
+    echo '<input type="hidden" name="username" value="' . $username . '">';
+    echo '<button type="submit">Ir a User Compras</button>';
+    echo '</form>';
 
     #boton hacer compras, buscar productos segun categoria
 
@@ -130,4 +134,4 @@ try {
 
 </body>
 
-<?php include('templates/footer.html');   ?>
+<?php include('../templates/footer.html');   ?>

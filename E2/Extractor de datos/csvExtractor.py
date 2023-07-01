@@ -69,7 +69,7 @@ def extraer_datos():
 
             id_clientes.append(linea[0])
             agregar = [linea[0],linea[2], linea[1], linea[3],linea[4], linea[5], linea[6]]
-            print(agregar)
+
             new_lineas_clientes.append(agregar)
             if linea[0] == '1':
                 print("Usuario con ID 0")
@@ -86,18 +86,23 @@ def extraer_datos():
     escribirC = [['id_venta', 'id_cliente', 'id_tienda', 'cantidad','fecha']]
 
     ID_venta = 0
+    ids_ventas = []
 
     ID_compras = []
     for linea in lineas_compras:
         if linea[0] != 'id_compra':
             if linea[3] in id_clientes:
-                new_LV = [str(ID_venta), linea[0], linea[2]]
-                ID_compras.append(linea[0])
-                escribirV.append(new_LV)
-                new_LC = [str(ID_venta), linea[3], linea[4], linea[5], linea[1]]
-                escribirC.append(new_LC)
+                if linea not in ids_ventas:
 
-                ID_venta +=1
+                    new_LV = [str(ID_venta), linea[0], linea[2]]
+                    ID_compras.append(linea[0])
+                    escribirV.append(new_LV)
+                    new_LC = [str(ID_venta), linea[3], linea[4], linea[5], linea[1]]
+                    escribirC.append(new_LC)
+
+                    ids_ventas.append(linea)
+
+                    ID_venta +=1
     escribir_csv('venta', escribirV)
     escribir_csv('compra', escribirC)
 
